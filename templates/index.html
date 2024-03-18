@@ -62,7 +62,7 @@
         button:hover {
             background-color: #45a049;
         }
-        #loaderGenerate {
+        .loader {
             border: 8px solid #f3f3f3;
             border-radius: 50%;
             border-top: 8px solid #3498db;
@@ -71,17 +71,6 @@
             animation: spin 2s linear infinite;
             margin: 20px auto;
             display: none; /* Hide loader initially */
-        }
-        #responseContainer {
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            position: relative;
-            padding: 20px;
-            overflow: hidden;
-            position: relative;
-            display: none; /* Hide response container initially */
         }
         .downloadButton {
             background-color: #3498db;
@@ -113,20 +102,16 @@
         <p>Generate documents effortlessly with EZ-DOC.AI. Simply enter your prompt below and click "Generate" to get started!</p>
         <textarea id="prompt" placeholder="Enter your prompt here"></textarea>
         <button onclick="generateDoc()">Generate</button>
-        <div id="loaderGenerate"></div> <!-- Loading spinner for generating document -->
-        <div id="responseContainer">
-            <button class="downloadButton" id="downloadButton" onclick="downloadFile()">Download</button>
-        </div>
+        <div id="loaderGenerate" class="loader"></div> <!-- Loading spinner for generating document -->
+        <button class="downloadButton" id="downloadButton" onclick="downloadFile()">Download</button>
     </div>
     <script>
         function generateDoc() {
             var prompt = document.getElementById("prompt").value;
             var loaderGenerate = document.getElementById("loaderGenerate");
-            var responseContainer = document.getElementById("responseContainer");
             var downloadButton = document.getElementById("downloadButton");
 
             loaderGenerate.style.display = "block"; // Display loader for generating document
-            responseContainer.style.display = "none"; // Hide response container
             downloadButton.style.display = "none"; // Hide download button
 
             fetch('/generate_docx', {
@@ -141,7 +126,6 @@
             .then(response => response.blob())
             .then(blob => {
                 loaderGenerate.style.display = "none"; // Hide loader for generating document
-                responseContainer.style.display = "block"; // Show response container
                 downloadButton.style.display = "block"; // Show download button
 
                 const url = window.URL.createObjectURL(new Blob([blob]));
