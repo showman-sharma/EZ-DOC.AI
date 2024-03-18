@@ -1,0 +1,10 @@
+{
+  "api_key": "nzFRW4gkhnxzFk0YbdIqhmKdw90BGWDUwyaCK6zr",
+  
+  "PI_DESC": "resources/ORMB - Price Items list.xlsx",
+  
+  "cert_path" : "resources/security/cert.pem",
+  "key_path" : "resources/security/key.pem"
+
+
+}
