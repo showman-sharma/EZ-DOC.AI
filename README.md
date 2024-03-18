@@ -1,54 +1,54 @@
 # EZ-DOC.AI
 
-EZ-DOC.AI is a document generation tool that utilizes the Cohere API to generate documents based on user prompts. It provides a convenient way to quickly generate documents by inputting a prompt, which is then processed by the Cohere API to generate a response text.
+EZ-DOC.AI is a document generation tool that provides a convenient web interface for users to generate documents effortlessly. It utilizes the power of the Cohere API for document generation based on user prompts. With EZ-DOC.AI, you can quickly generate documents by simply providing a prompt, making it an ideal tool for various document generation tasks.
 
 ## Features
 
-- Input a prompt and generate a document based on the provided query.
-- Easy-to-use interface for generating documents effortlessly.
-- Supports downloading the generated document in .docx format.
+- **Web Interface**: EZ-DOC.AI provides a user-friendly web interface for generating documents.
+- **Prompt-Based Generation**: Users can input a prompt into the web interface, and EZ-DOC.AI generates a document based on that prompt.
+- **Document Download**: Once the document is generated, users can download it directly from the web interface.
 
 ## Installation
 
-1. Install Python (if not already installed).
-2. Clone this repository:
+1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/your-username/ez-doc-ai.git
-    ```
+   ```bash
+   git clone https://github.com/your_username/EZ-DOC.AI.git
+   ```
 
-3. Navigate to the project directory:
+2. Install dependencies:
 
-    ```bash
-    cd ez-doc-ai
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. Install dependencies:
+3. Update configuration:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+   Update the `config/config.json` file with your Cohere API key.
+
+4. Run the Flask application:
+
+   ```bash
+   python app.py
+   ```
+
+5. Access the web interface:
+
+   Open your web browser and navigate to `http://localhost:5000/ez_doc_ai` to access the EZ-DOC.AI web interface.
 
 ## Usage
 
-1. Configure the `config/config.json` file with the necessary parameters, such as the Cohere API key.
-2. Run the Flask app:
+1. Access the EZ-DOC.AI web interface by navigating to `http://localhost:5000/ez_doc_ai`.
+2. Enter your prompt into the provided textarea.
+3. Click on the "Generate" button to initiate document generation.
+4. Wait for the document to be generated. A loading spinner will indicate that the process is ongoing.
+5. Once the document is ready, a "Download" button will appear. Click on it to download the generated document.
 
-    ```bash
-    python app.py
-    ```
+## Contributing
 
-3. Access the web interface by navigating to `http://localhost:5000/ez_doc_ai` in your web browser.
-4. Enter your prompt in the provided text area and click the "Generate" button.
-5. Once the document is generated, click the "Download" button to download the document in .docx format.
-
-## Dependencies
-
-- Python 3.x
-- Flask
-- Cohere API
-- Other dependencies (see `requirements.txt`)
+Contributions to EZ-DOC.AI are welcome! If you have any suggestions, bug reports, or feature requests, please feel free to open an issue or submit a pull request.
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
