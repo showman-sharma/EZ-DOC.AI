@@ -62,6 +62,16 @@
         button:hover {
             background-color: #45a049;
         }
+        #loaderGenerate {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+            display: none; /* Hide loader initially */
+        }
         #responseContainer {
             margin-top: 20px;
             border: 1px solid #ddd;
@@ -71,29 +81,7 @@
             padding: 20px;
             overflow: hidden;
             position: relative;
-        }
-        #responseLabel {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        #response {
-            font-size: 16px;
-            color: #333;
-        }
-        .loader {
-            border: 8px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 8px solid #3498db;
-            width: 60px;
-            height: 60px;
-            animation: spin 2s linear infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
+            display: none; /* Hide response container initially */
         }
         .downloadButton {
             background-color: #3498db;
@@ -107,11 +95,15 @@
             font-size: 18px;
             transition: background-color 0.3s ease;
             text-align: center;
-            display: none;
+            display: none; /* Hide download button initially */
             text-decoration: none;
         }
         .downloadButton:hover {
             background-color: #2980b9;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -121,22 +113,21 @@
         <p>Generate documents effortlessly with EZ-DOC.AI. Simply enter your prompt below and click "Generate" to get started!</p>
         <textarea id="prompt" placeholder="Enter your prompt here"></textarea>
         <button onclick="generateDoc()">Generate</button>
-        <div id="responseContainer" style="display: none;">
-            <div id="responseLabel">RESPONSE</div>
-            <div id="response"></div>
+        <div id="loaderGenerate"></div> <!-- Loading spinner for generating document -->
+        <div id="responseContainer">
             <button class="downloadButton" id="downloadButton" onclick="downloadFile()">Download</button>
-            <div id="loader" class="loader"></div>
         </div>
     </div>
     <script>
         function generateDoc() {
             var prompt = document.getElementById("prompt").value;
-            var loader = document.getElementById("loader");
-            var responseDiv = document.getElementById("response");
+            var loaderGenerate = document.getElementById("loaderGenerate");
             var responseContainer = document.getElementById("responseContainer");
             var downloadButton = document.getElementById("downloadButton");
 
-            loader.style.display = "block"; // Display loader
+            loaderGenerate.style.display = "block"; // Display loader for generating document
+            responseContainer.style.display = "none"; // Hide response container
+            downloadButton.style.display = "none"; // Hide download button
 
             fetch('/generate_docx', {
                 method: 'POST',
@@ -147,14 +138,21 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                loader.style.display = "none"; // Hide loader
-                responseDiv.innerHTML = data.response;
+            .then(response => response.blob())
+            .then(blob => {
+                loaderGenerate.style.display = "none"; // Hide loader for generating document
                 responseContainer.style.display = "block"; // Show response container
                 downloadButton.style.display = "block"; // Show download button
+
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const a = document.getElementById('downloadButton');
+                a.href = url;
+                a.download = 'output.docx';
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+                loaderGenerate.style.display = "none"; // Hide loader for generating document
+            });
         }
 
         function downloadFile() {

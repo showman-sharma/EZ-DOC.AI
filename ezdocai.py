@@ -102,7 +102,7 @@ class Doc_Generator:
 
         print(f"Co.chat begins")
 
-        query = 'Create a well formatted text output for a .docx file based on the following query: ```{0}```'.format(query)
+        query = 'Create a well formatted text output for a .docx file based on the following query: \"{0}\"'.format(query)
 
         response = self.co.chat(
             message=query,
