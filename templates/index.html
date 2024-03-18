@@ -46,7 +46,7 @@
             border-radius: 5px;
             resize: none;
         }
-        button {
+        button, .downloadButton {
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
@@ -57,9 +57,10 @@
             width: 100%;
             font-size: 18px;
             transition: background-color 0.3s ease;
+            text-align: center;
             display: block;
         }
-        button:hover {
+        button:hover, .downloadButton:hover {
             background-color: #45a049;
         }
         .loader {
@@ -70,26 +71,9 @@
             height: 40px;
             animation: spin 2s linear infinite;
             margin: 20px auto;
-            display: none; /* Hide loader initially */
+            display: none;
         }
-        .downloadButton {
-            background-color: #3498db;
-            color: white;
-            padding: 14px 20px;
-            margin: 20px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-            text-align: center;
-            display: none; /* Hide download button initially */
-            text-decoration: none;
-        }
-        .downloadButton:hover {
-            background-color: #2980b9;
-        }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -101,17 +85,19 @@
         <h1>EZ-DOC.AI</h1>
         <p>Generate documents effortlessly with EZ-DOC.AI. Simply enter your prompt below and click "Generate" to get started!</p>
         <textarea id="prompt" placeholder="Enter your prompt here"></textarea>
-        <button onclick="generateDoc()">Generate</button>
+        <button onclick="generateDoc()" id="generateButton">Generate</button>
         <div id="loaderGenerate" class="loader"></div> <!-- Loading spinner for generating document -->
-        <button class="downloadButton" id="downloadButton" onclick="downloadFile()">Download</button>
+        <button class="downloadButton" id="downloadButton" style="display: none;" onclick="downloadFile()">Download</button>
     </div>
     <script>
         function generateDoc() {
             var prompt = document.getElementById("prompt").value;
             var loaderGenerate = document.getElementById("loaderGenerate");
+            var generateButton = document.getElementById("generateButton");
             var downloadButton = document.getElementById("downloadButton");
 
             loaderGenerate.style.display = "block"; // Display loader for generating document
+            generateButton.style.display = "none"; // Hide generate button
             downloadButton.style.display = "none"; // Hide download button
 
             fetch('/generate_docx', {
@@ -127,6 +113,7 @@
             .then(blob => {
                 loaderGenerate.style.display = "none"; // Hide loader for generating document
                 downloadButton.style.display = "block"; // Show download button
+                generateButton.style.display = "block"; // Show generate button
 
                 const url = window.URL.createObjectURL(new Blob([blob]));
                 const a = document.getElementById('downloadButton');
