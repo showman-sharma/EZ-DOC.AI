@@ -1,51 +1,69 @@
 # EZ-DOC.AI
 
-EZ-DOC.AI is a document generation tool powered by the Cohere API. It allows users to generate documents effortlessly by providing a prompt. The prompt is processed by the Cohere API, which generates a response text that can be saved as a .docx file.
+> **Historical GenAI prototype.** This repository captures an earlier experiment in LLM-assisted document generation using Cohere and Flask. It is preserved as part of my engineering progression and is not positioned as a current production system.
+
+## What it explores
+
+EZ-DOC.AI takes a user prompt, sends it to a language model, and turns the generated response into a downloadable `.docx` document through a lightweight web application.
+
+The project explores a simple end-to-end GenAI flow:
+
+```text
+User prompt
+    ↓
+Flask application
+    ↓
+Cohere generation
+    ↓
+Document assembly
+    ↓
+DOCX output
+```
 
 ## Features
 
-- Generate documents quickly and easily by providing a prompt.
-- Utilizes the Cohere API for accurate and contextually relevant document generation.
-- Supports various prompt types, including questions, summaries, and more.
-- Download the generated document in .docx format for further use.
+- prompt-driven document generation,
+- Cohere API integration,
+- Flask-based web interface,
+- `.docx` document generation,
+- configurable local resource paths.
 
-## Installation
+## Setup
 
-1. Install the required dependencies using pip:
-   ```
-   pip install cohere
-   ```
+```bash
+git clone https://github.com/showman-sharma/EZ-DOC.AI.git
+cd EZ-DOC.AI
+pip install -r requirements.txt
+```
 
-2. Clone this repository:
-   ```
-   git clone https://github.com/yourusername/ez-doc-ai.git
-   ```
+Create a local configuration from the safe example:
 
-3. Update the configuration file `config/config.json` with your Cohere API key.
+```bash
+cp config/config.example.json config/config.json
+```
 
-## Usage
+Then replace `YOUR_COHERE_API_KEY` with your own key and adjust any local resource paths.
 
-1. Run the Flask web application:
-   ```
-   python app.py
-   ```
+> Never commit API keys, certificates, private keys, or other credentials. `config/config.json` and `*.pem` files are excluded from version control.
 
-2. Access the application in your web browser at `http://localhost:5000/ez_doc_ai`.
+## Run
 
-3. Enter your prompt in the text area provided and click the "Generate" button.
+```bash
+python app.py
+```
 
-4. Once the document is generated, click the "Download" button to save it as a .docx file.
+Then open the local Flask application in your browser.
 
-## Demo Video
+## Why I keep this repository
 
-Watch the demo video below to see EZ-DOC.AI in action:
+This project predates the more mature RAG, agentic, evaluation, and reasoning systems in my current portfolio. I keep it public because it shows an earlier stage of moving from isolated model experimentation toward **complete AI-powered application workflows**.
 
-[![Demo Video](demo/ezdocai_poc_demo.mp4)](demo/ezdocai_poc_demo.mp4)
+For newer work, see:
 
-## Contributors
-
-- V S S Anirudh Sharma
+- [agentic_rag](https://github.com/showman-sharma/agentic_rag)
+- [ai_blog_workflow](https://github.com/showman-sharma/ai_blog_workflow)
+- [drug_ae_reasoner](https://github.com/showman-sharma/drug_ae_reasoner)
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+MIT License. See [`LICENSE`](LICENSE).
