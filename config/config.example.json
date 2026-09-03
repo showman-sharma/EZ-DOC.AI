@@ -1,0 +1,6 @@
+{
+  "api_key": "YOUR_COHERE_API_KEY",
+  "PI_DESC": "resources/ORMB - Price Items list.xlsx",
+  "cert_path": "resources/security/cert.pem",
+  "key_path": "resources/security/key.pem"
+}
